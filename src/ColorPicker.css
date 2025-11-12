@@ -2,7 +2,7 @@
 .rcp-select { position: relative; display: inline-block; }
 .rcp-toggle { display: inline-flex; gap: 8px; align-items: center; padding: 6px 8px; border: 1px solid #ddd; background: white; cursor: pointer; }
 .rcp-dropdown { position: absolute; left: 0; top: calc(100% + 6px); background: white; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 6px 18px rgba(0,0,0,0.12); z-index: 10; }
-.rcp-dropdown ul { list-style: none; margin: 0; padding: 8px; min-width: 220px; }
+.rcp-dropdown ul { list-style: none; margin: 0; padding: 8px; max-height: 200px; overflow-y: auto; }
 .rcp-swatch-btn { display: inline-flex; gap: 8px; align-items: center; background: transparent; border: none; padding: 6px; width: 100%; text-align: left; }
 .rcp-item-name { flex: 1; }
 .rcp-item { display: flex; align-items: center; gap: 8px; }

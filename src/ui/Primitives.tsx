@@ -11,15 +11,35 @@ export const NumberField: React.FC<{ value: number; onChange: (v: number) => voi
   <input type="number" value={value} onChange={(e) => onChange(Number(e.target.value))} min={min} max={max} />
 );
 
-export const SavedItem: React.FC<{ c: { id: string; name: string; value: string }; onSelect: (v: string) => void; onEdit: (id: string) => void; onDelete: (id: string) => void; close?: () => void }> = ({ c, onSelect, onEdit, onDelete, close }) => (
+export const SavedItem: React.FC<{
+  c: {
+    Id: string,
+    Name: string,
+    ColorBrush: null,
+    IsCustom: boolean,
+    ColorType: number,
+    Alpha: number,
+    R: number,
+    G: number,
+    B: number,
+    C: number,
+    M: number,
+    Y: number,
+    K: number,
+    Tint: number,
+    Value: string,
+    IsBlack: boolean,
+    IsWhite: boolean
+  }; onSelect: (v: string) => void; onEdit: (id: string) => void; onDelete: (id: string) => void; close?: () => void
+}> = ({ c, onSelect, onEdit, onDelete, close }) => (
   <li className="rcp-item">
-    <button className="rcp-swatch-btn" onMouseDown={(e) => e.preventDefault()} onClick={() => { onSelect(c.value); close?.(); }}>
-      <span className="rcp-swatch" style={{ background: c.value }} aria-hidden />
-      <span className="rcp-item-name">{c.name}</span>
+    <button className="rcp-swatch-btn" onMouseDown={(e) => e.preventDefault()} onClick={() => { onSelect(c.Value); close?.(); }}>
+      <span className="rcp-swatch" style={{ background: c.Value }} aria-hidden />
+      <span className="rcp-item-name">{c.Name}</span>
     </button>
     <div className="rcp-item-actions">
-      <button aria-label={`edit-${c.id}`} className="rcp-icon" onMouseDown={(e) => e.preventDefault()} onClick={() => { onEdit(c.id); close?.(); }}>✎</button>
-      <button aria-label={`delete-${c.id}`} className="rcp-icon" onMouseDown={(e) => e.preventDefault()} onClick={() => { onDelete(c.id); close?.(); }}>🗑</button>
+      <button aria-label={`edit-${c.Id}`} className="rcp-icon" onMouseDown={(e) => e.preventDefault()} onClick={() => { onEdit(c.Id); close?.(); }}>✎</button>
+      <button aria-label={`delete-${c.Id}`} className="rcp-icon" onMouseDown={(e) => e.preventDefault()} onClick={() => { onDelete(c.Id); close?.(); }}>🗑</button>
     </div>
   </li>
 );

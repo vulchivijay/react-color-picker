@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { hexToRgb, rgbToHex, rgbToHsl, hslToRgb, tintHex } from './colorUtils';
 import { Field, NumberField } from './ui/Primitives';
 
@@ -18,14 +18,10 @@ export type ColorModalProps = {
 };
 
 // Field and NumberField imported from shared primitives
-
 export default function ColorModal(props: ColorModalProps) {
   const { openEditId, editingFormat, editingName, editingValue, tintPreviewPct, onChangeName, onChangeValue, onChangeFormat, onChangeTintPct, onRgbChange, onSave, onClose } = props;
-
   const currentRgb = useMemo(() => hexToRgb(editingValue), [editingValue]);
-
   if (!openEditId) return null;
-
   return (
     <div className="rcp-modal">
       <div className="rcp-modal-backdrop" onClick={onClose} />
@@ -63,9 +59,9 @@ export default function ColorModal(props: ColorModalProps) {
           const hsl = rgbToHsl(currentRgb.r, currentRgb.g, currentRgb.b);
           return (
             <div className="rcp-hsl">
-              <Field label="H"><NumberField value={hsl.h} onChange={(v) => { const { r,g,b } = hslToRgb(v, hsl.s, hsl.l); onChangeValue(rgbToHex(r,g,b)); }} min={0} max={360} /></Field>
-              <Field label="S"><NumberField value={hsl.s} onChange={(v) => { const { r,g,b } = hslToRgb(hsl.h, v, hsl.l); onChangeValue(rgbToHex(r,g,b)); }} min={0} max={100} /></Field>
-              <Field label="L"><NumberField value={hsl.l} onChange={(v) => { const { r,g,b } = hslToRgb(hsl.h, hsl.s, v); onChangeValue(rgbToHex(r,g,b)); }} min={0} max={100} /></Field>
+              <Field label="H"><NumberField value={hsl.h} onChange={(v) => { const { r, g, b } = hslToRgb(v, hsl.s, hsl.l); onChangeValue(rgbToHex(r, g, b)); }} min={0} max={360} /></Field>
+              <Field label="S"><NumberField value={hsl.s} onChange={(v) => { const { r, g, b } = hslToRgb(hsl.h, v, hsl.l); onChangeValue(rgbToHex(r, g, b)); }} min={0} max={100} /></Field>
+              <Field label="L"><NumberField value={hsl.l} onChange={(v) => { const { r, g, b } = hslToRgb(hsl.h, hsl.s, v); onChangeValue(rgbToHex(r, g, b)); }} min={0} max={100} /></Field>
               <div className="rcp-preview" style={{ background: editingValue }} aria-hidden />
             </div>
           );
