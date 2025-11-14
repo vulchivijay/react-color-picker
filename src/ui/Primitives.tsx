@@ -12,38 +12,27 @@ export const NumberField: React.FC<{ value: number; onChange: (v: number) => voi
 );
 
 export const SavedItem: React.FC<{
-  c: {
-    Id: string,
-    Name: string,
-    ColorBrush: null,
-    IsCustom: boolean,
-    ColorType: number,
-    Alpha: number,
-    R: number,
-    G: number,
-    B: number,
-    C: number,
-    M: number,
-    Y: number,
-    K: number,
-    Tint: number,
-    Value: string,
-    IsBlack: boolean,
-    IsWhite: boolean
-  }; onSelect: (v: string) => void; onEdit: (id: string) => void; onDelete: (id: string) => void; close?: () => void
-}> = ({ c, onSelect, onEdit, onDelete, close }) => (
-  <li className="rcp-item">
-    <button className="rcp-swatch-btn" onMouseDown={(e) => e.preventDefault()} onClick={() => { onSelect(c.Value); close?.(); }}>
-      <span className="rcp-swatch" style={{ background: c.Value }} aria-hidden />
-      <span className="rcp-item-name">{c.Name}</span>
-    </button>
-    {c.IsCustom && (
-      <div className="rcp-item-actions">
-        <button aria-label={`edit-${c.Id}`} className="rcp-icon" onMouseDown={(e) => e.preventDefault()} onClick={() => { onEdit(c.Id); close?.(); }}>✎</button>
-        <button aria-label={`delete-${c.Id}`} className="rcp-icon" onMouseDown={(e) => e.preventDefault()} onClick={() => { onDelete(c.Id); close?.(); }}>🗑</button>
-      </div>
-    )}
-  </li>
-);
+  // accept a minimal shape so tests can pass simple objects
+  c: { Id?: string; id?: string; Name?: string; name?: string; Value?: string; value?: string; IsCustom?: boolean } | any;
+  onSelect: (v: string) => void; onEdit: (id: string) => void; onDelete: (id: string) => void; close?: () => void;
+  active?: boolean;
+}> = ({ c, onSelect, onEdit, onDelete, close, active = false }) => {
+  const id = c.Id ?? c.id;
+  const name = c.Name ?? c.name ?? '';
+  const value = c.Value ?? c.value ?? '';
+  const isCustom = c.IsCustom ?? c.isCustom ?? false;
+  return (
+    <li className={`rcp-item ${active ? 'rcp-active' : ''}`}>
+      <button className={`rcp-swatch-btn ${active ? 'rcp-active' : ''}`} onMouseDown={(e) => e.preventDefault()} onClick={() => { onSelect(value); close?.(); }}>
+        <span className="rcp-swatch" style={{ background: value }} aria-hidden />
+        <span className="rcp-item-name">{name}</span>
+      </button>
+      { isCustom && (<div className="rcp-item-actions">
+        <button aria-label={`edit-${id}`} className="rcp-icon" onMouseDown={(e) => e.preventDefault()} onClick={() => { onEdit(id); close?.(); }}>✎</button>
+        <button aria-label={`delete-${id}`} className="rcp-icon" onMouseDown={(e) => e.preventDefault()} onClick={() => { onDelete(id); close?.(); }}>🗑</button>
+      </div>) }
+    </li>
+  );
+};
 
 // default export removed; use named exports

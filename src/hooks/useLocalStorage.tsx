@@ -7,7 +7,6 @@ export default function useLocalStorage<T>(
   const [value, setValue] = useState<T>(() => {
     try {
       const item = localStorage.getItem(key);
-      console.log("Item ::: ", item);
       return item ? JSON.parse(item) : initialValue;
     } catch {
       return initialValue;
@@ -21,8 +20,6 @@ export default function useLocalStorage<T>(
       // ignore errors
     }
   }, [key, value]);
-
-  console.log("Total ::: ", value);
 
   return [value, setValue];
 }

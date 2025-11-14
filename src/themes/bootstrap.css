@@ -1,0 +1,4 @@
+.rcp-theme-bootstrap .rcp-toggle { border-radius: .25rem; box-shadow: none; border: 1px solid #ced4da; }
+.rcp-theme-bootstrap .rcp-item-actions .rcp-icon { background: #fff; border-color: #ced4da; }
+.rcp-theme-bootstrap .rcp-item.rcp-active { background-color: #e9f5ff; }
+.rcp-theme-bootstrap .rcp-swatch-btn.rcp-active { outline: 2px solid #0d6efd; }
